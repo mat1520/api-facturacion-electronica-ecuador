@@ -140,3 +140,27 @@ dist/
 uploads/
 logs/
 certificates/
+
+# Archivos temporales y de desarrollo
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*~
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración local específicos del desarrollador
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+
+# Logs de pruebas locales
+test-results/
+test-output/
+
+# Certificados de prueba (solo para desarrollo local)
+certs/test/
+*.p12.test
+*.pem.test

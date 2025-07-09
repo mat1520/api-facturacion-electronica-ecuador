@@ -22,8 +22,9 @@ class XMLDSigSigner {
         };
     }
 
-    // TODO: Implementar firma XMLDSig completa
     signXML(xmlString) {
+        // Implementación de firma XMLDSig simplificada para demo
+        // En producción, usar librerías especializadas como xml-crypto
         // 1. Crear elemento Signature
         // 2. Crear Reference con transformaciones
         // 3. Calcular digest SHA-1

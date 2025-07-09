@@ -1,96 +1,220 @@
-# API de Facturación Electrónica para Ecuador
+# 🇪🇨 API de Facturación Electrónica para Ecuador
 
-API RESTful para la generación, firma y autorización de facturas electrónicas según los requisitos del SRI de Ecuador. Este proyecto está alojado en [este repositorio de GitHub](https://github.com/mat1520/api-facturacion-electronica-ecuador).
+<div align="center">
 
-## Características
+![Ecuador](https://img.shields.io/badge/🇪🇨_Ecuador-SRI_Compatible-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-1.0.0-green?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge)
+![Node](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Status](https://img.shields.io/badge/status-🟢_LIVE-brightgreen?style=for-the-badge)
 
-- ✅ Generación de XML de facturas electrónicas según estándares SRI
-- ✅ Cálculo automático de clave de acceso con módulo 11
-- ✅ Firma electrónica con certificados P12 (implementación base)
-- ✅ Simulación de comunicación con Web Services del SRI
-- ✅ Arquitectura modular y escalable
-- ✅ Autenticación por API Key
-- ✅ Validación de datos de entrada
-- ✅ Manejo de errores robusto
-- ✅ Modo demo funcional sin certificado
-- ✅ Lista para ser desplegada en contenedores Docker
+**🚀 API RESTful para la generación, firma y autorización de facturas electrónicas según los requisitos del SRI de Ecuador**
 
-## ⚠️ Modo Demo
+[🌐 **DEMO EN VIVO**](https://api-facturacion-electronica-ecuador.onrender.com) | [📖 **DOCUMENTACIÓN**](#-documentación-de-la-api) | [🤝 **CONTRIBUIR**](#-contribuir) | [💝 **DONAR**](#-apoya-el-proyecto)
 
-La API actualmente funciona en **modo demostración** con las siguientes características:
+---
 
-- ✅ Generación completa de XML de facturas según estándares SRI
-- ✅ Cálculo correcto de clave de acceso
-- ✅ Estructura de datos completa y válida
-- ⚠️ Firma digital simplificada (requiere implementación XMLDSig completa)
-- ⚠️ Simulación de envío al SRI (no conecta a web services reales)
-- ⚠️ Respuestas simuladas de autorización
+### 🎯 **Prueba la API ahora mismo:**
 
-Para **producción** se necesita:
-1. Implementar firma XMLDSig completa
-2. Integración real con web services del SRI
-3. Certificado P12 válido del SRI
-4. Manejo completo de respuestas del SRI
+```bash
+curl https://api-facturacion-electronica-ecuador.onrender.com/health
+```
 
-## Stack Tecnológico
+[![Deploy to Render](https://img.shields.io/badge/Deploy%20to-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://render.com/deploy?repo=https://github.com/mat1520/api-facturacion-electronica-ecuador)
+[![Deploy to Railway](https://img.shields.io/badge/Deploy%20to-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app)
 
-- **Backend:** Node.js, Express.js
-- **XML Processing:** xmlbuilder
-- **Firma Digital:** node-forge
-- **Web Services:** soap
-- **Utilidades:** moment, uuid
-- **Base de Datos:** PostgreSQL (preparado para conectar)
-- **Autenticación:** API Key
-- **Entorno:** Variables de entorno con dotenv
+</div>
 
-## Estructura del Proyecto
+---
+
+## 🌟 **Características Principales**
+
+<table>
+<tr>
+<td width="50%">
+
+### ✅ **Funcionalidades Implementadas**
+- 🎯 **Generación de XML** según estándares SRI
+- 🔢 **Cálculo automático** de clave de acceso
+- 🛡️ **Autenticación** por API Key
+- ✅ **Validación completa** de datos
+- 📊 **API RESTful** profesional
+- 🔄 **Manejo robusto** de errores
+- 📱 **Respuestas estructuradas** JSON
+
+</td>
+<td width="50%">
+
+### ⚠️ **Modo Demostración**
+- 🟢 **XML válido** según SRI
+- 🟢 **Clave de acceso** calculada
+- 🟢 **Estructura completa** de datos
+- 🟡 **Firma digital** simplificada
+- 🟡 **Envío al SRI** simulado
+- 🟡 **Autorización** simulada
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🚀 **Demo en Vivo**
+
+### 🌐 **API Desplegada**: https://api-facturacion-electronica-ecuador.onrender.com
+
+<div align="center">
+
+| Endpoint | Método | Descripción | Auth |
+|----------|--------|-------------|------|
+| `/health` | GET | Health check | ❌ |
+| `/` | GET | Página demo | ❌ |
+| `/api/facturas` | GET | Listar facturas | ✅ |
+| `/api/facturas` | POST | Crear factura | ✅ |
+| `/api/facturas/:id` | GET | Consultar factura | ✅ |
+
+**🔑 API Key para pruebas:** `render_demo_api_key_2025_ecuador_sri`
+
+</div>
+
+### 🧪 **Prueba Rápida con cURL:**
+
+```bash
+# Health Check
+curl https://api-facturacion-electronica-ecuador.onrender.com/health
+
+# Crear Factura
+curl -X POST https://api-facturacion-electronica-ecuador.onrender.com/api/facturas \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: render_demo_api_key_2025_ecuador_sri" \
+  -d '{
+    "infoFactura": {
+      "razonSocialComprador": "CLIENTE DEMO S.A.",
+      "identificacionComprador": "0987654321001",
+      "totalSinImpuestos": "100.00",
+      "importeTotal": "112.00"
+    },
+    "detalles": [{
+      "descripcion": "Producto de prueba",
+      "cantidad": "1",
+      "precioUnitario": "100.00",
+      "precioTotalSinImpuesto": "100.00"
+    }]
+  }'
+
+# Listar Facturas
+curl -H "x-api-key: render_demo_api_key_2025_ecuador_sri" \
+     https://api-facturacion-electronica-ecuador.onrender.com/api/facturas
+```
+
+### 🔥 **Prueba con JavaScript:**
+
+```javascript
+// Crear una factura
+const response = await fetch('https://api-facturacion-electronica-ecuador.onrender.com/api/facturas', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': 'render_demo_api_key_2025_ecuador_sri'
+    },
+    body: JSON.stringify({
+        "infoFactura": {
+            "razonSocialComprador": "CLIENTE DEMO S.A.",
+            "identificacionComprador": "0987654321001",
+            "totalSinImpuestos": "100.00",
+            "importeTotal": "112.00"
+        },
+        "detalles": [{
+            "descripcion": "Producto de prueba",
+            "cantidad": "1",
+            "precioUnitario": "100.00",
+            "precioTotalSinImpuesto": "100.00"
+        }]
+    })
+});
+
+const factura = await response.json();
+console.log('Factura creada:', factura);
+```
+
+---
+
+## 📦 **Stack Tecnológico**
+
+<div align="center">
+
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+
+</div>
+
+| Categoría | Tecnología | Propósito |
+|-----------|------------|-----------|
+| **Backend** | Node.js + Express.js | Servidor web y API REST |
+| **XML Processing** | xmlbuilder | Generación de XML según SRI |
+| **Firma Digital** | node-forge | Manejo de certificados P12 |
+| **Web Services** | soap | Comunicación con SRI |
+| **Base de Datos** | PostgreSQL | Persistencia (preparado) |
+| **Seguridad** | API Key + Helmet | Autenticación y protección |
+| **Deploy** | Render/Railway | Hosting en la nube |
+
+---
+
+## 🏗️ **Estructura del Proyecto**
 
 ```
 api-facturacion-electronica-ecuador/
-├── app.js                     # Punto de entrada principal
-├── package.json               # Dependencias y scripts
-├── .env.example              # Plantilla de variables de entorno
-├── .gitignore                # Archivos ignorados por Git
-├── README.md                 # Documentación del proyecto
-├── controllers/              # Controladores (lógica de rutas)
+├── 📂 controllers/          # Lógica de controladores
 │   └── factura.controller.js
-├── routes/                   # Definición de rutas
+├── 📂 routes/              # Definición de rutas API
 │   └── factura.routes.js
-└── services/                 # Lógica de negocio
-    └── sri.service.js
+├── 📂 services/            # Lógica de negocio
+│   ├── sri.service.js
+│   └── sri-webservices.js
+├── 📂 utils/               # Utilidades y helpers
+│   └── xmldsig.js
+├── 📂 database/            # Esquemas de base de datos
+│   └── schema.sql
+├── 📂 public/              # Archivos estáticos
+│   └── index.html
+├── 📄 app.js               # Punto de entrada principal
+├── 📄 package.json         # Dependencias y scripts
+├── 📄 Dockerfile           # Containerización
+├── 📄 ejemplo-factura.json # Datos de prueba
+└── 📄 README.md           # Este archivo
 ```
 
-## Instalación y Uso Local
+---
 
-### 1. Clonar el repositorio
+## 🚀 **Instalación y Uso Local**
+
+### **⚡ Inicio Rápido:**
 
 ```bash
+# 1. Clonar el repositorio
 git clone https://github.com/mat1520/api-facturacion-electronica-ecuador.git
 cd api-facturacion-electronica-ecuador
-```
 
-### 2. Instalar dependencias
-
-```bash
+# 2. Instalar dependencias
 npm install
-```
 
-### 3. Configurar variables de entorno
-
-Crear un archivo `.env` a partir del `.env.example`:
-
-```bash
+# 3. Configurar variables de entorno
 cp .env.example .env
+
+# 4. Ejecutar en desarrollo
+npm run dev
+
+# 5. ¡Listo! API corriendo en http://localhost:3000
 ```
 
-Llenar las variables de entorno necesarias:
+### **🔧 Variables de Entorno:**
 
 ```env
 # Configuración del Servidor
 PORT=3000
-
-# Configuración de la Base de Datos (PostgreSQL)
-DATABASE_URL=postgresql://user:password@localhost:5432/facturacion_db
 
 # Configuración del SRI
 SRI_ENVIRONMENT=PRUEBAS
@@ -99,129 +223,100 @@ EMISOR_RAZON_SOCIAL=MI EMPRESA S.A.
 EMISOR_NOMBRE_COMERCIAL=MI EMPRESA
 EMISOR_DIRECCION_MATRIZ=Av. Principal 123 y Secundaria
 
-# Certificado de Firma Electrónica
-P12_BASE64=BASE64_DEL_CERTIFICADO_P12
-P12_PASSWORD=password_del_certificado
-
 # API Key para seguridad
-API_KEY=mi_api_key_super_secreta_2024
+API_KEY=demo_api_key_2025_ecuador_sri
+
+# Certificado P12 (opcional para demo)
+P12_BASE64=
+P12_PASSWORD=
 ```
 
-### 4. Ejecutar en modo de desarrollo
+---
 
-```bash
-npm run dev
+## 📖 **Documentación de la API**
+
+### **🔐 Autenticación**
+
+Todas las solicitudes a `/api/facturas` requieren el header:
+```
+x-api-key: render_demo_api_key_2025_ecuador_sri
 ```
 
-### 5. Ejecutar en modo producción
+### **📋 Endpoints Disponibles**
 
-```bash
-npm start
+#### **🏥 Health Check**
+```http
+GET /health
+```
+**Respuesta:**
+```json
+{
+  "status": "OK",
+  "message": "API de Facturación Electrónica Ecuador funcionando correctamente",
+  "timestamp": "2025-07-09T03:45:21.123Z"
+}
 ```
 
-La API estará disponible en `http://localhost:3000`.
-
-## Endpoints
-
-### Health Check
-- **GET** `/health` - Verificar estado de la API (sin autenticación)
-
-### Facturas
-- **GET** `/api/facturas` - Listar todas las facturas (modo desarrollo)
-- **POST** `/api/facturas` - Crear y enviar una nueva factura
-- **GET** `/api/facturas/:claveAcceso` - Consultar el estado de una factura
-
-### Autenticación
-
-Todas las solicitudes a los endpoints de `/api/facturas` deben incluir la cabecera `x-api-key` con la clave secreta definida en las variables de entorno.
-
-```bash
-curl -H "x-api-key: mi_api_key_super_secreta_2024" \
-     -H "Content-Type: application/json" \
-     http://localhost:3000/api/facturas
+#### **📄 Crear Factura**
+```http
+POST /api/facturas
+Content-Type: application/json
+x-api-key: render_demo_api_key_2025_ecuador_sri
 ```
 
-## Ejemplos de Uso
-
-### Crear una factura (usando el archivo de ejemplo)
-
-```bash
-curl -X POST http://localhost:3000/api/facturas \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: demo_api_key_2025_ecuador_sri" \
-  -d @ejemplo-factura.json
-```
-
-### Crear una factura (con datos inline)
-
-```bash
-curl -X POST http://localhost:3000/api/facturas \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: demo_api_key_2025_ecuador_sri" \
-  -d '{
-    "infoFactura": {
-      "razonSocialComprador": "CLIENTE EJEMPLO S.A.",
-      "identificacionComprador": "0987654321001",
-      "totalSinImpuestos": "100.00",
-      "totalConImpuestos": [
+**Body de ejemplo:**
+```json
+{
+  "infoFactura": {
+    "fechaEmision": "08/07/2025",
+    "razonSocialComprador": "EMPRESA DEMO S.A.",
+    "identificacionComprador": "0987654321001",
+    "tipoIdentificacionComprador": "04",
+    "totalSinImpuestos": "100.00",
+    "totalDescuento": "0.00",
+    "totalConImpuestos": [
+      {
+        "codigo": "2",
+        "codigoPorcentaje": "2",
+        "baseImponible": "100.00",
+        "valor": "12.00"
+      }
+    ],
+    "importeTotal": "112.00",
+    "moneda": "DOLAR"
+  },
+  "detalles": [
+    {
+      "codigoPrincipal": "PROD001",
+      "descripcion": "Producto de prueba",
+      "cantidad": "1.00",
+      "precioUnitario": "100.00",
+      "descuento": "0.00",
+      "precioTotalSinImpuesto": "100.00",
+      "impuestos": [
         {
           "codigo": "2",
           "codigoPorcentaje": "2",
+          "tarifa": "12.00",
           "baseImponible": "100.00",
           "valor": "12.00"
         }
-      ],
-      "importeTotal": "112.00"
-    },
-    "detalles": [
-      {
-        "codigoPrincipal": "001",
-        "descripcion": "Producto de prueba",
-        "cantidad": "1",
-        "precioUnitario": "100.00",
-        "descuento": "0.00",
-        "precioTotalSinImpuesto": "100.00",
-        "impuestos": [
-          {
-            "codigo": "2",
-            "codigoPorcentaje": "2",
-            "tarifa": "12",
-            "baseImponible": "100.00",
-            "valor": "12.00"
-          }
-        ]
-      }
-    ]
-  }'
+      ]
+    }
+  ]
+}
 ```
 
-### Listar todas las facturas
-
-```bash
-curl -H "x-api-key: demo_api_key_2025_ecuador_sri" \
-     http://localhost:3000/api/facturas
-```
-
-### Consultar una factura
-
-```bash
-curl -H "x-api-key: demo_api_key_2025_ecuador_sri" \
-     http://localhost:3000/api/facturas/0807202501123456789000120010010000000011234567813
-```
-
-## Respuestas de la API
-
-### Factura creada exitosamente
-
+**Respuesta exitosa:**
 ```json
 {
   "mensaje": "Factura procesada exitosamente",
   "resultado": {
-    "claveAcceso": "0807202501123456789000120010010000000011234567813",
+    "claveAcceso": "0807202501123456789000110010010316726391234567814",
     "estado": "AUTORIZADA",
     "fechaProceso": "2025-07-08T10:30:00.000Z",
     "autorizacion": {
-      "numeroAutorizacion": "0807202501123456789000120010010000000011234567813",
+      "numeroAutorizacion": "0807202501123456789000110010010316726391234567814",
       "fechaAutorizacion": "2025-07-08T10:30:00.000Z",
       "estado": "AUTORIZADO"
     }
@@ -229,91 +324,192 @@ curl -H "x-api-key: demo_api_key_2025_ecuador_sri" \
 }
 ```
 
-### Error en validación
-
-```json
-{
-  "error": "Errores de validación en los datos de la factura",
-  "errores": [
-    "razonSocialComprador es requerido",
-    "identificacionComprador es requerido"
-  ],
-  "codigo": "VALIDACION_FALLIDA"
-}
+#### **📋 Listar Facturas**
+```http
+GET /api/facturas
+x-api-key: render_demo_api_key_2025_ecuador_sri
 ```
 
-## Variables de Entorno Requeridas
-
-| Variable | Descripción | Ejemplo |
-|----------|-------------|---------|
-| `PORT` | Puerto del servidor | `3000` |
-| `DATABASE_URL` | URL de conexión a PostgreSQL | `postgresql://user:pass@host:5432/db` |
-| `SRI_ENVIRONMENT` | Entorno del SRI | `PRUEBAS` o `PRODUCCION` |
-| `EMISOR_RUC` | RUC del emisor | `1234567890001` |
-| `EMISOR_RAZON_SOCIAL` | Razón social del emisor | `MI EMPRESA S.A.` |
-| `EMISOR_NOMBRE_COMERCIAL` | Nombre comercial | `MI EMPRESA` |
-| `EMISOR_DIRECCION_MATRIZ` | Dirección matriz | `Av. Principal 123` |
-| `P12_BASE64` | Certificado P12 en Base64 | `MIIKaAIBAzCCCi...` |
-| `P12_PASSWORD` | Contraseña del certificado | `mi_password` |
-| `API_KEY` | Clave de autenticación | `demo_api_key_2025_ecuador_sri` |
-
-## Códigos de Error
-
-| Código | Descripción |
-|--------|-------------|
-| `DATOS_REQUERIDOS` | El cuerpo de la solicitud está vacío |
-| `VALIDACION_FALLIDA` | Errores en la validación de datos |
-| `ERROR_PROCESAMIENTO` | Error al procesar la factura en el SRI |
-| `CLAVE_REQUERIDA` | Clave de acceso no proporcionada |
-| `FACTURA_NO_ENCONTRADA` | Factura no existe en el sistema |
-| `ERROR_INTERNO` | Error interno del servidor |
-
-## Desarrollo
-
-### Scripts disponibles
-
-- `npm start` - Ejecutar en producción
-- `npm run dev` - Ejecutar en desarrollo con nodemon
-
-### Estructura de directorios recomendada
-
+#### **🔍 Consultar Factura**
+```http
+GET /api/facturas/{claveAcceso}
+x-api-key: render_demo_api_key_2025_ecuador_sri
 ```
-├── controllers/    # Lógica de controladores
-├── routes/        # Definición de rutas
-├── services/      # Lógica de negocio
-├── models/        # Modelos de base de datos (futuro)
-├── middleware/    # Middlewares personalizados (futuro)
-├── utils/         # Utilidades y helpers (futuro)
-└── tests/         # Pruebas unitarias (futuro)
-```
-
-## Próximas Características
-
-- [ ] Integración completa con PostgreSQL
-- [ ] Autenticación JWT
-- [ ] Rate limiting
-- [ ] Logs estructurados
-- [ ] Pruebas unitarias
-- [ ] Documentación con Swagger
-- [ ] Contenedorización con Docker
-- [ ] CI/CD con GitHub Actions
-
-## Contribuir
-
-1. Fork del repositorio
-2. Crear rama feature (`git checkout -b feature/nueva-caracteristica`)
-3. Commit de cambios (`git commit -am 'Agregar nueva característica'`)
-4. Push a la rama (`git push origin feature/nueva-caracteristica`)
-5. Crear Pull Request
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-## Soporte
-
-Para soporte técnico o preguntas, crear un issue en el repositorio de GitHub.
 
 ---
 
-**Desarrollado con ❤️ para la comunidad ecuatoriana de desarrolladores**
+## 🛠️ **Despliegue**
+
+### **🌐 Deploy en Render (Recomendado)**
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/mat1520/api-facturacion-electronica-ecuador)
+
+1. Haz clic en el botón "Deploy to Render"
+2. Conecta tu cuenta de GitHub
+3. ¡Automáticamente se desplegará!
+
+### **🚄 Deploy en Railway**
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/deploy)
+
+### **🐳 Deploy con Docker**
+
+```bash
+# Construir imagen
+docker build -t api-facturacion-ecuador .
+
+# Ejecutar contenedor
+docker run -p 3000:3000 \
+  -e API_KEY=tu_api_key \
+  -e SRI_ENVIRONMENT=PRUEBAS \
+  api-facturacion-ecuador
+```
+
+---
+
+## 📊 **Estado del Proyecto**
+
+### **✅ Implementado:**
+- [x] Generación de XML según estándares SRI
+- [x] Cálculo de clave de acceso con módulo 11
+- [x] API RESTful completa
+- [x] Autenticación por API Key
+- [x] Validación de datos de entrada
+- [x] Manejo de errores robusto
+- [x] Despliegue en la nube
+- [x] Documentación completa
+
+### **🚧 En Desarrollo:**
+- [ ] Firma XMLDSig real (requiere certificado P12)
+- [ ] Integración con web services reales del SRI
+- [ ] Base de datos PostgreSQL
+- [ ] Sistema de logs avanzado
+- [ ] Tests unitarios y de integración
+
+### **🔮 Roadmap:**
+- [ ] Autenticación JWT
+- [ ] Rate limiting
+- [ ] Dashboard web
+- [ ] Notificaciones automáticas
+- [ ] Exportación a PDF
+- [ ] API versioning
+
+---
+
+## 🤝 **Contribuir**
+
+¡Las contribuciones son bienvenidas! 🎉
+
+### **🔄 Proceso:**
+1. **Fork** el repositorio
+2. **Crea** una rama feature (`git checkout -b feature/nueva-caracteristica`)
+3. **Commit** tus cambios (`git commit -m 'feat: nueva característica'`)
+4. **Push** a la rama (`git push origin feature/nueva-caracteristica`)
+5. **Abre** un Pull Request
+
+### **🐛 Reportar Bugs:**
+Abre un [issue en GitHub](https://github.com/mat1520/api-facturacion-electronica-ecuador/issues) con:
+- Descripción del bug
+- Pasos para reproducir
+- Comportamiento esperado vs actual
+- Screenshots (si aplica)
+
+### **💡 Sugerir Features:**
+¡Todas las ideas son bienvenidas! Abre un issue con la etiqueta `enhancement`.
+
+---
+
+## 📞 **Soporte y Contacto**
+
+<div align="center">
+
+### **🔧 Soporte Técnico**
+
+[![Telegram](https://img.shields.io/badge/Telegram-@MAT3810-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/MAT3810)
+[![GitHub Issues](https://img.shields.io/badge/GitHub-Issues-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mat1520/api-facturacion-electronica-ecuador/issues)
+
+**Para dudas técnicas, contacta por Telegram: [@MAT3810](https://t.me/MAT3810)**
+
+</div>
+
+### **📚 Recursos Adicionales:**
+- [Documentación oficial del SRI](http://www.sri.gob.ec/)
+- [Especificaciones técnicas SRI](http://www.sri.gob.ec/web/guest/facturacion-electronica)
+- [Esquemas XSD del SRI](http://www.sri.gob.ec/web/guest/facturacion-electronica)
+
+---
+
+## 💝 **Apoya el Proyecto**
+
+<div align="center">
+
+### **☕ ¿Te gusta este proyecto?**
+
+**¡Ayúdanos a mantenerlo y mejorarlo!**
+
+[![PayPal](https://img.shields.io/badge/PayPal-Donar-blue?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/paypalme/ArielMelo200?country.x=EC&locale.x=es_XC)
+
+**Tu donación nos ayuda a:**
+- 🚀 Mantener la API funcionando 24/7
+- 🔧 Desarrollar nuevas características
+- 🐛 Corregir bugs y mejorar la calidad
+- 📚 Crear mejor documentación
+- 🆓 Mantener el proyecto gratuito y open source
+
+[![PayPal Donation](https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme/ArielMelo200?country.x=EC&locale.x=es_XC)
+
+</div>
+
+### **🌟 Otras formas de apoyar:**
+- ⭐ **Dale una estrella** a este repositorio
+- 🐦 **Comparte** el proyecto en redes sociales
+- 📢 **Recomienda** la API a otros desarrolladores
+- 🤝 **Contribuye** con código o documentación
+
+---
+
+## 📄 **Licencia**
+
+<div align="center">
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
+
+**Este proyecto está bajo la Licencia MIT**
+
+Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+</div>
+
+---
+
+## 🏆 **Reconocimientos**
+
+### **💎 Desarrollado por:**
+- **[@mat1520](https://github.com/mat1520)** - *Creador y desarrollador principal*
+
+### **🙏 Agradecimientos especiales:**
+- Comunidad de desarrolladores ecuatorianos 🇪🇨
+- Servicio de Rentas Internas (SRI) por las especificaciones técnicas
+- Contribuidores del proyecto open source
+
+### **🎯 Inspiración:**
+Este proyecto nace de la necesidad de democratizar la facturación electrónica en Ecuador, proporcionando herramientas gratuitas y de calidad para todos los desarrolladores.
+
+---
+
+<div align="center">
+
+## 🇪🇨 **Hecho con ❤️ para Ecuador**
+
+**Desarrollado con pasión para la comunidad ecuatoriana de desarrolladores**
+
+[![Ecuador](https://img.shields.io/badge/🇪🇨-Hecho_en_Ecuador-blue?style=for-the-badge)](https://github.com/mat1520)
+[![Open Source](https://img.shields.io/badge/❤️-Open_Source-red?style=for-the-badge)](https://github.com/mat1520/api-facturacion-electronica-ecuador)
+
+**⭐ Si este proyecto te ayudó, ¡dale una estrella! ⭐**
+
+---
+
+**© 2025 [@mat1520](https://github.com/mat1520) - Todos los derechos reservados**
+
+</div>

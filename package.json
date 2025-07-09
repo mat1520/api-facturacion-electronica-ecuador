@@ -5,7 +5,10 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "powershell -ExecutionPolicy Bypass -File ./tests/test-api.ps1",
+    "test:complete": "powershell -ExecutionPolicy Bypass -File ./tests/test-api-completo.ps1",
+    "test:advanced": "powershell -ExecutionPolicy Bypass -File ./tests/test-api-avanzado.ps1"
   },
   "repository": {
     "type": "git",
