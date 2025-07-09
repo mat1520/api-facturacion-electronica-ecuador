@@ -1,0 +1,41 @@
+{
+  "name": "api-facturacion-electronica-ecuador",
+  "version": "1.0.0",
+  "description": "API RESTful para la generación, firma y autorización de facturas electrónicas según los requisitos del SRI de Ecuador",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mat1520/api-facturacion-electronica-ecuador.git"
+  },
+  "keywords": [
+    "api",
+    "facturacion",
+    "electronica",
+    "ecuador",
+    "sri",
+    "node.js",
+    "express"
+  ],
+  "author": "mat1520",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3",
+    "xmlbuilder": "^15.1.1",
+    "node-forge": "^1.3.1",
+    "soap": "^0.45.0",
+    "moment": "^2.29.4",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

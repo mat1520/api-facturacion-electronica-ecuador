@@ -1,0 +1,52 @@
+{
+  "infoFactura": {
+    "fechaEmision": "08/07/2025",
+    "razonSocialComprador": "EMPRESA DEMO S.A.",
+    "identificacionComprador": "0987654321001",
+    "tipoIdentificacionComprador": "04",
+    "dirEstablecimiento": "Av. Principal 123 y Secundaria, Quito",
+    "obligadoContabilidad": "SI",
+    "totalSinImpuestos": "100.00",
+    "totalDescuento": "0.00",
+    "totalConImpuestos": [
+      {
+        "codigo": "2",
+        "codigoPorcentaje": "2",
+        "baseImponible": "100.00",
+        "valor": "12.00"
+      }
+    ],
+    "propina": "0.00",
+    "importeTotal": "112.00",
+    "moneda": "DOLAR"
+  },
+  "detalles": [
+    {
+      "codigoPrincipal": "PROD001",
+      "descripcion": "Producto de prueba para facturación electrónica",
+      "cantidad": "1.00",
+      "precioUnitario": "100.00",
+      "descuento": "0.00",
+      "precioTotalSinImpuesto": "100.00",
+      "impuestos": [
+        {
+          "codigo": "2",
+          "codigoPorcentaje": "2",
+          "tarifa": "12.00",
+          "baseImponible": "100.00",
+          "valor": "12.00"
+        }
+      ]
+    }
+  ],
+  "infoAdicional": [
+    {
+      "nombre": "Email",
+      "valor": "cliente@empresa.com"
+    },
+    {
+      "nombre": "Direccion",
+      "valor": "Av. Ejemplo 456, Guayaquil"
+    }
+  ]
+}
