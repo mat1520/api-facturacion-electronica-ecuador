@@ -16,6 +16,9 @@ const PORT = process.env.PORT || 3000;
 // 5. Aplicar el middleware express.json() para parsear los cuerpos de las solicitudes
 app.use(express.json());
 
+// Servir archivos estáticos para la página de demo
+app.use(express.static('public'));
+
 // 6. Crear un middleware simple para la autenticación de API Key
 const authenticateApiKey = (req, res, next) => {
     // Leer la clave de la cabecera 'x-api-key'

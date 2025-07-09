@@ -1,0 +1,37 @@
+# render.yaml - Configuración para Render
+services:
+  - type: web
+    name: api-facturacion-ecuador
+    env: node
+    repo: https://github.com/mat1520/api-facturacion-electronica-ecuador.git
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: npm start
+    plan: free
+    region: oregon
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SRI_ENVIRONMENT
+        value: PRUEBAS
+      - key: EMISOR_RUC
+        value: "1234567890001"
+      - key: EMISOR_RAZON_SOCIAL
+        value: "EMPRESA DEMO SOCIEDAD ANONIMA"
+      - key: EMISOR_NOMBRE_COMERCIAL
+        value: "EMPRESA DEMO"
+      - key: EMISOR_DIRECCION_MATRIZ
+        value: "Av. Principal 123 y Secundaria, Quito, Ecuador"
+      - key: API_KEY
+        value: "render_demo_api_key_2025_ecuador"
+      - key: P12_BASE64
+        value: ""
+      - key: P12_PASSWORD
+        value: ""
+
+  - type: pserv
+    name: postgres-facturacion
+    plan: free
+    databaseName: facturacion_db
+    user: facturacion_user

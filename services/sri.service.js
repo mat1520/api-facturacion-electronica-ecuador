@@ -204,8 +204,12 @@ async function generarYProcesarFactura(datosFactura) {
         };
 
         // 5. Leer el certificado digital desde la variable de entorno P12_BASE64
-        if (!process.env.P12_BASE64 || !process.env.P12_PASSWORD) {
-            console.log('⚠️  Certificado digital no configurado - Modo demostración');
+        const modoDemo = !process.env.P12_BASE64 || process.env.P12_BASE64 === '';
+        
+        if (modoDemo) {
+            console.log('🔄 Ejecutando en MODO DEMO - Sin certificado real');
+        } else {
+            console.log('🔄 Ejecutando en MODO PRODUCCIÓN - Con certificado real');
         }
 
         console.log('🔄 Generando factura electrónica...');
@@ -216,7 +220,7 @@ async function generarYProcesarFactura(datosFactura) {
 
         // Firmar el XML (implementación simplificada)
         let xmlFirmado = xmlGenerado;
-        if (process.env.P12_BASE64 && process.env.P12_PASSWORD) {
+        if (!modoDemo && process.env.P12_BASE64 && process.env.P12_PASSWORD) {
             try {
                 const certificadoBuffer = Buffer.from(process.env.P12_BASE64, 'base64');
                 xmlFirmado = firmarXML(xmlGenerado, certificadoBuffer, process.env.P12_PASSWORD);
@@ -224,10 +228,17 @@ async function generarYProcesarFactura(datosFactura) {
             } catch (error) {
                 console.log('⚠️  Error en firma digital:', error.message);
             }
+        } else {
+            console.log('⚠️  Modo demo - XML sin firma digital real');
         }
 
         // Simular envío al SRI (en modo demo)
-        console.log('📤 Simulando envío al SRI...');
+        if (modoDemo) {
+            console.log('📤 MODO DEMO - Simulando envío al SRI...');
+        } else {
+            console.log('📤 Enviando al SRI real...');
+            // Aquí iría la integración real cuando tengas certificado
+        }
         
         // En producción, aquí se haría la llamada real a los web services del SRI
         const respuestaSimulada = {

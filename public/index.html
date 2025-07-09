@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Facturación Electrónica Ecuador - Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { background: #1f4e79; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .demo-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .endpoint { background: white; padding: 15px; margin: 10px 0; border-left: 4px solid #28a745; }
+        .method { display: inline-block; padding: 4px 8px; border-radius: 4px; color: white; font-weight: bold; margin-right: 10px; }
+        .get { background: #17a2b8; }
+        .post { background: #28a745; }
+        code { background: #e9ecef; padding: 2px 4px; border-radius: 3px; }
+        .warning { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 8px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🇪🇨 API de Facturación Electrónica Ecuador</h1>
+        <p>Demostración funcional desplegada en la nube</p>
+    </div>
+
+    <div class="warning">
+        <h3>⚠️ Modo Demostración</h3>
+        <p>Esta API está funcionando en <strong>modo demo</strong>. Genera XMLs válidos según estándares del SRI pero <strong>no usa certificados reales</strong>.</p>
+    </div>
+
+    <div class="demo-section">
+        <h2>🔍 Endpoints Disponibles</h2>
+        
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <strong>/health</strong> - Health check (sin autenticación)
+            <br><small>Verifica que la API esté funcionando correctamente</small>
+        </div>
+
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <strong>/api/facturas</strong> - Listar facturas
+            <br><small>Requiere header: <code>x-api-key: render_demo_api_key_2025_ecuador</code></small>
+        </div>
+
+        <div class="endpoint">
+            <span class="method post">POST</span>
+            <strong>/api/facturas</strong> - Crear nueva factura
+            <br><small>Requiere header: <code>x-api-key: render_demo_api_key_2025_ecuador</code></small>
+        </div>
+
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <strong>/api/facturas/{claveAcceso}</strong> - Consultar factura específica
+            <br><small>Requiere header: <code>x-api-key: render_demo_api_key_2025_ecuador</code></small>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>🧪 Ejemplo de uso con JavaScript</h2>
+        <pre><code>
+// Ejemplo: Crear una factura
+const response = await fetch('/api/facturas', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': 'render_demo_api_key_2025_ecuador'
+    },
+    body: JSON.stringify({
+        "infoFactura": {
+            "razonSocialComprador": "CLIENTE DEMO S.A.",
+            "identificacionComprador": "0987654321001",
+            "totalSinImpuestos": "100.00",
+            "importeTotal": "112.00"
+        },
+        "detalles": [{
+            "descripcion": "Producto demo",
+            "cantidad": "1",
+            "precioUnitario": "100.00",
+            "precioTotalSinImpuesto": "100.00"
+        }]
+    })
+});
+
+const resultado = await response.json();
+console.log(resultado);
+        </code></pre>
+    </div>
+
+    <div class="demo-section">
+        <h2>📋 Características implementadas</h2>
+        <ul>
+            <li>✅ Generación de XML según estándares SRI</li>
+            <li>✅ Cálculo automático de clave de acceso</li>
+            <li>✅ Validación completa de datos</li>
+            <li>✅ API RESTful con autenticación</li>
+            <li>✅ Respuestas estructuradas</li>
+            <li>⚠️ Firma digital simulada (requiere certificado real)</li>
+            <li>⚠️ Envío al SRI simulado (requiere certificado real)</li>
+        </ul>
+    </div>
+
+    <div class="demo-section">
+        <h2>🚀 Repositorio y Código</h2>
+        <p>Código fuente disponible en: <a href="https://github.com/mat1520/api-facturacion-electronica-ecuador" target="_blank">GitHub</a></p>
+        <p>Desarrollado por: <strong>@mat1520</strong></p>
+    </div>
+
+    <script>
+        // Función simple para probar el health check
+        async function testHealthCheck() {
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                console.log('Health Check:', data);
+                alert('API funcionando: ' + data.message);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al conectar con la API');
+            }
+        }
+        
+        // Agregar botón de prueba
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.createElement('button');
+            button.textContent = '🧪 Probar Health Check';
+            button.onclick = testHealthCheck;
+            button.style.cssText = 'background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 20px 0;';
+            document.querySelector('.demo-section').appendChild(button);
+        });
+    </script>
+</body>
+</html>
